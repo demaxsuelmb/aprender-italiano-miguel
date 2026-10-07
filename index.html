@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Corso di Italiano - Imparare la Teoria</title>
+  <title>Corso di Italiano - Imparare la Teoria & Conversazione</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -22,12 +22,16 @@
         </div>
         <div class="brand-text">
           <h2>Impariamo <span>Italiano</span></h2>
-          <p>Módulo Teórico Fundamental</p>
+          <p>Teoria & Conversação</p>
         </div>
       </div>
 
       <nav class="nav-menu">
-        <button class="nav-btn active" data-tab="fonetica">
+        <button class="nav-btn active" data-tab="conversazione">
+          <i class="fa-solid fa-comments"></i>
+          <span>Modo Conversação (Voz)</span>
+        </button>
+        <button class="nav-btn" data-tab="fonetica">
           <i class="fa-solid fa-volume-high"></i>
           <span>1. Fonética e Pronúncia</span>
         </button>
@@ -66,7 +70,7 @@
           <label for="speedRate">Velocidade: <span id="speedVal">0.9x</span></label>
           <input type="range" id="speedRate" min="0.5" max="1.2" step="0.1" value="0.9">
         </div>
-        <p class="tts-note">Clique no ícone 🔊 ao lado das palavras para ouvir a pronúncia exata.</p>
+        <p class="tts-note">Sua voz ou texto serão praticados em tempo real.</p>
       </div>
     </aside>
 
@@ -74,19 +78,105 @@
     <main class="main-content">
       <header class="top-header">
         <div class="header-title">
-          <h1 id="currentTabTitle">1. Fonética e Pronúncia Italiana</h1>
-          <p id="currentTabDesc">Aprenda as regras fundamentais de sons, combinação de consoantes e entonação.</p>
+          <h1 id="currentTabTitle">Modo Conversação Interativa (Voz & Chat)</h1>
+          <p id="currentTabDesc">Pratique conversação em tempo real com voz nativa e reconhecimento de microfone no navegador.</p>
         </div>
         <div class="header-actions">
           <div class="search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Pesquisar regra, regra do 'C', 'GLI'...">
+            <input type="text" id="searchInput" placeholder="Pesquisar regra ou exemplo...">
           </div>
         </div>
       </header>
 
+      <!-- TAB CONVERSAÇÃO (NOVA TAB PRINCIPAL) -->
+      <section id="conversazione" class="tab-pane active">
+        <div class="hero-banner green">
+          <div class="banner-content">
+            <span class="badge">Prática Oral Interativa</span>
+            <h2>Conversação ao Vivo no Navegador</h2>
+            <p>Escolha um cenário, digite ou <strong>fale pelo microfone</strong> em italiano! O assistente responderá com áudio nativo e dicas de correção.</p>
+          </div>
+        </div>
+
+        <!-- Scenario Selection Bar -->
+        <div class="scenarios-grid">
+          <div class="scenario-card active" data-scenario="casual">
+            <div class="scen-icon"><i class="fa-solid fa-mug-hot"></i></div>
+            <div class="scen-info">
+              <h4>Luca (Bate-papo Casual)</h4>
+              <p>Converse sobre apresentações, rotina e gostos.</p>
+            </div>
+          </div>
+          <div class="scenario-card" data-scenario="bar">
+            <div class="scen-icon"><i class="fa-solid fa-utensils"></i></div>
+            <div class="scen-info">
+              <h4>Marco (No Bar / Restaurante)</h4>
+              <p>Simule pedir um café, pratos e a conta em Roma.</p>
+            </div>
+          </div>
+          <div class="scenario-card" data-scenario="hotel">
+            <div class="scen-icon"><i class="fa-solid fa-hotel"></i></div>
+            <div class="scen-info">
+              <h4>Sofia (Recepção do Hotel)</h4>
+              <p>Faça check-in e peça informações de viagem.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Chat Window -->
+        <div class="chat-container">
+          <div class="chat-header">
+            <div class="partner-status">
+              <div class="avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+              <div>
+                <h4 id="partnerName">Luca - Tutor de Italiano</h4>
+                <span class="status-online"><i class="fa-solid fa-circle"></i> Pronto para conversar</span>
+              </div>
+            </div>
+            <div class="chat-tools">
+              <label class="toggle-switch">
+                <input type="checkbox" id="autoAudioToggle" checked>
+                <span class="slider"></span>
+              </label>
+              <span class="tool-label">Áudio Automático</span>
+            </div>
+          </div>
+
+          <div class="chat-messages" id="chatMessages">
+            <!-- Initial AI message -->
+            <div class="msg msg-ai">
+              <div class="msg-bubble">
+                Ciao! Io sono Luca. Benvenuto! Come ti chiami e di dove sei?
+                <button class="btn-speak inline-speak" data-text="Ciao! Io sono Luca. Benvenuto! Come ti chiami e di dove sei?"><i class="fa-solid fa-volume-high"></i></button>
+              </div>
+              <div class="msg-sub">Luca • Italiano Nativo</div>
+            </div>
+          </div>
+
+          <!-- Corrections Feedback Panel -->
+          <div class="feedback-panel hidden" id="feedbackPanel">
+            <div class="fb-header"><i class="fa-solid fa-wand-magic-sparkles"></i> Dica de Correção & Vocabulário</div>
+            <div class="fb-content" id="feedbackContent">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Chat Input Controls -->
+          <div class="chat-input-bar">
+            <button class="btn-mic" id="btnMic" title="Falar pelo Microfone">
+              <i class="fa-solid fa-microphone"></i>
+            </button>
+            <input type="text" id="chatInput" placeholder="Digite sua resposta em italiano (ex: Ciao, mi chiamo Miguel...)" autocomplete="off">
+            <button class="btn-send" id="btnSend">
+              <i class="fa-solid fa-paper-plane"></i> Enviar
+            </button>
+          </div>
+        </div>
+      </section>
+
       <!-- TAB 1: FONÉTICA -->
-      <section id="fonetica" class="tab-pane active">
+      <section id="fonetica" class="tab-pane">
         <div class="hero-banner">
           <div class="banner-content">
             <span class="badge">Regra de Ouro nº 1</span>
@@ -115,7 +205,7 @@
                 <div class="table-row">
                   <td><span class="hl">CA, CO, CU</span></td>
                   <td>CA, CO, CU (Duro)</td>
-                  <td><strong>Caffè, Ciao? No: Casa</strong></td>
+                  <td><strong>Caffè, Casa</strong></td>
                   <td><button class="btn-speak" data-text="Caffè, Casa"><i class="fa-solid fa-volume-high"></i></button></td>
                 </div>
                 <div class="table-row">
@@ -180,7 +270,7 @@
                     <span class="sound-match">Equivale ao <strong>NH</strong> em Português</span>
                     <button class="btn-speak" data-text="Gnocchi, Lasagna, Bagno"><i class="fa-solid fa-volume-high"></i></button>
                   </div>
-                  <p class="sound-desc">Pronuncia-se como em <em>ninho</em> ou <em>bテクノ</em>.</p>
+                  <p class="sound-desc">Pronuncia-se como em <em>ninho</em> ou <em>banho</em>.</p>
                   <div class="examples">
                     <span><strong>Gn</strong>occhi (nhóque)</span>
                     <span>Lasa<strong>gn</strong>a</span>
@@ -194,7 +284,7 @@
                     <span class="sound-match">Equivale ao <strong>CH / X</strong> em Português</span>
                     <button class="btn-speak" data-text="Scena, Sciroppo, Prosciutto"><i class="fa-solid fa-volume-high"></i></button>
                   </div>
-                  <p class="sound-desc">Pronuncia-se como em <em>xícara</em> ou <em>cena</em> falado no Rio.</p>
+                  <p class="sound-desc">Pronuncia-se como em <em>xícara</em> ou <em>cena</em>.</p>
                   <div class="examples">
                     <span><strong>Sc</strong>ena (xêna)</span>
                     <span>Pro<strong>sc</strong>iutto (presunto)</span>
@@ -208,7 +298,7 @@
                     <span class="sound-match">Pausa/Tensão prolongada</span>
                     <button class="btn-speak" data-text="Palla, Pala, Anno, Ano"><i class="fa-solid fa-volume-high"></i></button>
                   </div>
-                  <p class="sound-desc">Consoantes duplas mudam o sentido! Deve-se segurar o som da consoante por um instante.</p>
+                  <p class="sound-desc">Consoantes duplas mudam o sentido! Segure o som por um instante.</p>
                   <div class="examples-contrast">
                     <div class="pair">
                       <span><strong>Pala</strong> (pá)</span> vs <span><strong>Palla</strong> (bola)</span>
@@ -235,7 +325,6 @@
         </div>
 
         <div class="grid-2">
-          <!-- Regras de Gênero e Plural -->
           <div class="card">
             <div class="card-header">
               <div class="icon-box blue"><i class="fa-solid fa-venus-mars"></i></div>
@@ -248,7 +337,7 @@
                   <div class="rule-item">
                     <span class="singular">Singular: termina em <strong>-O</strong></span>
                     <span class="plural">Plural: vira <strong>-I</strong></span>
-                    <div class="ex">Ragazz<strong>o</strong> &rarr; Ragazz<strong>i</strong> (garoto/garotos) <button class="btn-speak" data-text="Ragazzo, Ragazzi"><i class="fa-solid fa-volume-high"></i></button></div>
+                    <div class="ex">Ragazz<strong>o</strong> &rarr; Ragazz<strong>i</strong> <button class="btn-speak" data-text="Ragazzo, Ragazzi"><i class="fa-solid fa-volume-high"></i></button></div>
                   </div>
                 </div>
 
@@ -257,24 +346,22 @@
                   <div class="rule-item">
                     <span class="singular">Singular: termina em <strong>-A</strong></span>
                     <span class="plural">Plural: vira <strong>-E</strong></span>
-                    <div class="ex">Donn<strong>a</strong> &rarr; Donn<strong>e</strong> (mulher/mulheres) <button class="btn-speak" data-text="Donna, Donne"><i class="fa-solid fa-volume-high"></i></button></div>
+                    <div class="ex">Donn<strong>a</strong> &rarr; Donn<strong>e</strong> <button class="btn-speak" data-text="Donna, Donne"><i class="fa-solid fa-volume-high"></i></button></div>
                   </div>
                 </div>
 
                 <div class="gender-box neu">
                   <h4><i class="fa-solid fa-shuffle"></i> Neutro / Variável em -E</h4>
                   <div class="rule-item">
-                    <span class="singular">Singular: termina em <strong>-E</strong> (Masc ou Fem)</span>
+                    <span class="singular">Singular: termina em <strong>-E</strong></span>
                     <span class="plural">Plural: SEMPRE vira <strong>-I</strong></span>
                     <div class="ex">Il Ristorant<strong>e</strong> &rarr; I Ristorant<strong>i</strong> <button class="btn-speak" data-text="Il ristorante, I ristoranti"><i class="fa-solid fa-volume-high"></i></button></div>
-                    <div class="ex">La Chiav<strong>e</strong> &rarr; Le Chiav<strong>i</strong> <button class="btn-speak" data-text="La chiave, Le chiavi"><i class="fa-solid fa-volume-high"></i></button></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Artigos Definidos -->
           <div class="card">
             <div class="card-header">
               <div class="icon-box green"><i class="fa-solid fa-list-check"></i></div>
@@ -353,12 +440,11 @@
           <div class="banner-content">
             <span class="badge">O Coração da Língua</span>
             <h2>Pronomes Pessoais & Verbos Auxiliares</h2>
-            <p>Os verbos <em>Essere</em> (Ser/Estar) e <em>Avere</em> (Ter/Haver) constroem 80% das conversas cotidianas e tempos compostos em italiano.</p>
+            <p>Os verbos <em>Essere</em> (Ser/Estar) e <em>Avere</em> (Ter/Haver) constroem 80% das conversas cotidianas.</p>
           </div>
         </div>
 
         <div class="grid-2">
-          <!-- Pronomes e Verbo Essere -->
           <div class="card">
             <div class="card-header">
               <div class="icon-box purple"><i class="fa-solid fa-user"></i></div>
@@ -369,68 +455,23 @@
                 <thead>
                   <tr>
                     <th>Pronome</th>
-                    <th>Tradução</th>
                     <th>Essere</th>
                     <th>Exemplo Prático</th>
                     <th>Ouvir</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><strong>Io</strong></td>
-                    <td>Eu</td>
-                    <td><span class="verb-form">sono</span></td>
-                    <td>Io <strong>sono</strong> brasiliano.</td>
-                    <td><button class="btn-speak" data-text="Io sono brasiliano"><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Tu</strong></td>
-                    <td>Tu / Você (informal)</td>
-                    <td><span class="verb-form">sei</span></td>
-                    <td>Tu <strong>sei</strong> molto gentile.</td>
-                    <td><button class="btn-speak" data-text="Tu sei molto gentile"><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Lui / Lei</strong></td>
-                    <td>Ele / Ela</td>
-                    <td><span class="verb-form">è</span></td>
-                    <td>Lui <strong>è</strong> un medico.</td>
-                    <td><button class="btn-speak" data-text="Lui è un medico"><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Lei</strong> (formal)</td>
-                    <td>O senhor / A senhora</td>
-                    <td><span class="verb-form">è</span></td>
-                    <td>Lei <strong>è</strong> italiana?</td>
-                    <td><button class="btn-speak" data-text="Lei è italiana?"><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Noi</strong></td>
-                    <td>Nós</td>
-                    <td><span class="verb-form">siamo</span></td>
-                    <td>Noi <strong>siamo</strong> a Roma.</td>
-                    <td><button class="btn-speak" data-text="Noi siamo a Roma"><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Voi</strong></td>
-                    <td>Vocês / Vós</td>
-                    <td><span class="verb-form">siete</span></td>
-                    <td>Voi <strong>siete</strong> pronti?</td>
-                    <td><button class="btn-speak" data-text="Voi siete pronti?"><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Loro</strong></td>
-                    <td>Eles / Elas</td>
-                    <td><span class="verb-form">sono</span></td>
-                    <td>Loro <strong>sono</strong> felici.</td>
-                    <td><button class="btn-speak" data-text="Loro sono felici"><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
+                  <tr><td><strong>Io</strong></td><td><span class="verb-form">sono</span></td><td>Io <strong>sono</strong> brasiliano.</td><td><button class="btn-speak" data-text="Io sono brasiliano"><i class="fa-solid fa-volume-high"></i></button></td></tr>
+                  <tr><td><strong>Tu</strong></td><td><span class="verb-form">sei</span></td><td>Tu <strong>sei</strong> molto gentile.</td><td><button class="btn-speak" data-text="Tu sei molto gentile"><i class="fa-solid fa-volume-high"></i></button></td></tr>
+                  <tr><td><strong>Lui/Lei</strong></td><td><span class="verb-form">è</span></td><td>Lui <strong>è</strong> un medico.</td><td><button class="btn-speak" data-text="Lui è un medico"><i class="fa-solid fa-volume-high"></i></button></td></tr>
+                  <tr><td><strong>Noi</strong></td><td><span class="verb-form">siamo</span></td><td>Noi <strong>siamo</strong> a Roma.</td><td><button class="btn-speak" data-text="Noi siamo a Roma"><i class="fa-solid fa-volume-high"></i></button></td></tr>
+                  <tr><td><strong>Voi</strong></td><td><span class="verb-form">siete</span></td><td>Voi <strong>siete</strong> pronti?</td><td><button class="btn-speak" data-text="Voi siete pronti?"><i class="fa-solid fa-volume-high"></i></button></td></tr>
+                  <tr><td><strong>Loro</strong></td><td><span class="verb-form">sono</span></td><td>Loro <strong>sono</strong> felici.</td><td><button class="btn-speak" data-text="Loro sono felici"><i class="fa-solid fa-volume-high"></i></button></td></tr>
                 </tbody>
               </table>
             </div>
           </div>
 
-          <!-- Verbo Avere -->
           <div class="card">
             <div class="card-header">
               <div class="icon-box red"><i class="fa-solid fa-key"></i></div>
@@ -439,7 +480,7 @@
             <div class="card-body">
               <div class="tip-box">
                 <i class="fa-solid fa-lightbulb"></i>
-                <p><strong>Atenção ao H Mudo:</strong> As formas <em>ho, hai, ha, hanno</em> têm H totalmente mudo! Pronunciam-se exatamente "ó", "ái", "á", "án-no".</p>
+                <p><strong>H Mudo:</strong> <em>ho, hai, ha, hanno</em> têm H totalmente mudo!</p>
               </div>
 
               <table class="verb-table">
@@ -448,53 +489,16 @@
                     <th>Pronome</th>
                     <th>Avere</th>
                     <th>Exemplo Prático</th>
-                    <th>Expressão Comum</th>
                     <th>Ouvir</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><strong>Io</strong></td>
-                    <td><span class="verb-form red">ho</span></td>
-                    <td>Io <strong>ho</strong> venti anni.</td>
-                    <td><em>ho fame</em> (tenho fome)</td>
-                    <td><button class="btn-speak" data-text="Io ho venti anni. Ho fame."><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Tu</strong></td>
-                    <td><span class="verb-form red">hai</span></td>
-                    <td>Tu <strong>hai</strong> una bella macchina.</td>
-                    <td><em>hai sete</em> (tem sede)</td>
-                    <td><button class="btn-speak" data-text="Tu hai una bella macchina"><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Lui / Lei</strong></td>
-                    <td><span class="verb-form red">ha</span></td>
-                    <td>Lei <strong>ha</strong> tempo oggi.</td>
-                    <td><em>ha caldo</em> (está com calor)</td>
-                    <td><button class="btn-speak" data-text="Lei ha tempo oggi"><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Noi</strong></td>
-                    <td><span class="verb-form red">abbiamo</span></td>
-                    <td>Noi <strong>abbiamo</strong> una casa.</td>
-                    <td><em>abbiamo sonno</em></td>
-                    <td><button class="btn-speak" data-text="Noi abbiamo una casa"><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Voi</strong></td>
-                    <td><span class="verb-form red">avete</span></td>
-                    <td>Voi <strong>avete</strong> domande?</td>
-                    <td><em>avete fretta</em></td>
-                    <td><button class="btn-speak" data-text="Voi avete domande?"><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Loro</strong></td>
-                    <td><span class="verb-form red">hanno</span></td>
-                    <td>Loro <strong>hanno</strong> due figli.</td>
-                    <td><em>hanno paura</em></td>
-                    <td><button class="btn-speak" data-text="Loro hanno due figli"><i class="fa-solid fa-volume-high"></i></button></td>
-                  </tr>
+                  <tr><td><strong>Io</strong></td><td><span class="verb-form red">ho</span></td><td>Io <strong>ho</strong> venti anni.</td><td><button class="btn-speak" data-text="Io ho venti anni. Ho fame."><i class="fa-solid fa-volume-high"></i></button></td></tr>
+                  <tr><td><strong>Tu</strong></td><td><span class="verb-form red">hai</span></td><td>Tu <strong>hai</strong> una bella macchina.</td><td><button class="btn-speak" data-text="Tu hai una bella macchina"><i class="fa-solid fa-volume-high"></i></button></td></tr>
+                  <tr><td><strong>Lui/Lei</strong></td><td><span class="verb-form red">ha</span></td><td>Lei <strong>ha</strong> tempo oggi.</td><td><button class="btn-speak" data-text="Lei ha tempo oggi"><i class="fa-solid fa-volume-high"></i></button></td></tr>
+                  <tr><td><strong>Noi</strong></td><td><span class="verb-form red">abbiamo</span></td><td>Noi <strong>abbiamo</strong> una casa.</td><td><button class="btn-speak" data-text="Noi abbiamo una casa"><i class="fa-solid fa-volume-high"></i></button></td></tr>
+                  <tr><td><strong>Voi</strong></td><td><span class="verb-form red">avete</span></td><td>Voi <strong>avete</strong> domande?</td><td><button class="btn-speak" data-text="Voi avete domande?"><i class="fa-solid fa-volume-high"></i></button></td></tr>
+                  <tr><td><strong>Loro</strong></td><td><span class="verb-form red">hanno</span></td><td>Loro <strong>hanno</strong> due figli.</td><td><button class="btn-speak" data-text="Loro hanno due figli"><i class="fa-solid fa-volume-high"></i></button></td></tr>
                 </tbody>
               </table>
             </div>
@@ -508,19 +512,17 @@
           <div class="banner-content">
             <span class="badge">O Padrão dos Verbos</span>
             <h2>As 3 Conjugações no Presente Indicativo</h2>
-            <p>Em italiano, todos os verbos no infinitivo terminam em <strong>-ARE</strong>, <strong>-ERE</strong> ou <strong>-IRE</strong>. Remova a terminação e adicione os sufixos padrão!</p>
+            <p>Em italiano, os verbos terminam em <strong>-ARE</strong>, <strong>-ERE</strong> ou <strong>-IRE</strong>.</p>
           </div>
         </div>
 
         <div class="grid-3">
-          <!-- 1a Conjugação: ARE -->
           <div class="card">
             <div class="card-header">
               <span class="conj-badge green">1ª Conjugação (-ARE)</span>
               <h3>Parlare (Falar)</h3>
             </div>
             <div class="card-body">
-              <p class="root-info">Radical: <strong>parl-</strong></p>
               <ul class="conj-list">
                 <li><span>Io</span> <span>parl<strong>-o</strong></span></li>
                 <li><span>Tu</span> <span>parl<strong>-i</strong></span></li>
@@ -529,22 +531,18 @@
                 <li><span>Voi</span> <span>parl<strong>-ate</strong></span></li>
                 <li><span>Loro</span> <span>parl<strong>-ano</strong></span></li>
               </ul>
-              <div class="card-footer">
-                <button class="btn-speak w-100" data-text="Io parlo, Tu parli, Lui parla, Noi parliamo, Voi parlate, Loro parlano">
-                  <i class="fa-solid fa-volume-high"></i> Ouvir Conjugação
-                </button>
-              </div>
+              <button class="btn-speak w-100" data-text="Io parlo, Tu parli, Lui parla, Noi parliamo, Voi parlate, Loro parlano">
+                <i class="fa-solid fa-volume-high"></i> Ouvir Conjugação
+              </button>
             </div>
           </div>
 
-          <!-- 2a Conjugação: ERE -->
           <div class="card">
             <div class="card-header">
               <span class="conj-badge blue">2ª Conjugação (-ERE)</span>
               <h3>Vedere (Ver)</h3>
             </div>
             <div class="card-body">
-              <p class="root-info">Radical: <strong>ved-</strong></p>
               <ul class="conj-list">
                 <li><span>Io</span> <span>ved<strong>-o</strong></span></li>
                 <li><span>Tu</span> <span>ved<strong>-i</strong></span></li>
@@ -553,22 +551,18 @@
                 <li><span>Voi</span> <span>ved<strong>-ete</strong></span></li>
                 <li><span>Loro</span> <span>ved<strong>-ono</strong></span></li>
               </ul>
-              <div class="card-footer">
-                <button class="btn-speak w-100" data-text="Io vedo, Tu vedi, Lui vede, Noi vediamo, Voi vedete, Loro vedono">
-                  <i class="fa-solid fa-volume-high"></i> Ouvir Conjugação
-                </button>
-              </div>
+              <button class="btn-speak w-100" data-text="Io vedo, Tu vedi, Lui vede, Noi vediamo, Voi vedete, Loro vedono">
+                <i class="fa-solid fa-volume-high"></i> Ouvir Conjugação
+              </button>
             </div>
           </div>
 
-          <!-- 3a Conjugação: IRE -->
           <div class="card">
             <div class="card-header">
               <span class="conj-badge red">3ª Conjugação (-IRE)</span>
-              <h3>Dormire / Capire</h3>
+              <h3>Dormire (Dormir)</h3>
             </div>
             <div class="card-body">
-              <p class="root-info">Modelo Padrão: <strong>Dormire</strong></p>
               <ul class="conj-list">
                 <li><span>Io</span> <span>dorm<strong>-o</strong></span></li>
                 <li><span>Tu</span> <span>dorm<strong>-i</strong></span></li>
@@ -577,14 +571,9 @@
                 <li><span>Voi</span> <span>dorm<strong>-ite</strong></span></li>
                 <li><span>Loro</span> <span>dorm<strong>-ono</strong></span></li>
               </ul>
-              <div class="isc-note">
-                <small><strong>Nota (-isc):</strong> Alguns verbos como <em>Capire</em> recebem <em>-isc-</em> (capisco, capisci, capisce, capiscono).</small>
-              </div>
-              <div class="card-footer">
-                <button class="btn-speak w-100" data-text="Io dormo, Tu dormi, Lui dorme, Noi dormiamo, Voi dormite, Loro dormono">
-                  <i class="fa-solid fa-volume-high"></i> Ouvir Conjugação
-                </button>
-              </div>
+              <button class="btn-speak w-100" data-text="Io dormo, Tu dormi, Lui dorme, Noi dormiamo, Voi dormite, Loro dormono">
+                <i class="fa-solid fa-volume-high"></i> Ouvir Conjugação
+              </button>
             </div>
           </div>
         </div>
@@ -596,7 +585,7 @@
           <div class="banner-content">
             <span class="badge">Sintaxe Italiana</span>
             <h2>Como Construir Frases em Italiano</h2>
-            <p>Entenda a ordem dos elementos, o uso do sujeito oculto e a negação simples e direta.</p>
+            <p>Entenda a ordem dos elementos, o uso do sujeito oculto e a negação simples.</p>
           </div>
         </div>
 
@@ -604,11 +593,9 @@
           <div class="card">
             <div class="card-header">
               <div class="icon-box green"><i class="fa-solid fa-code-branch"></i></div>
-              <h3>1. Omissão do Sujeito (Soggetto Sottinteso)</h3>
+              <h3>1. Omissão do Sujeito</h3>
             </div>
             <div class="card-body">
-              <p class="explanation">Como cada pessoa verbal possui uma terminação única no presente, os italianos **raramente** usam pronomes sujeitos (io, tu, noi...) a menos que queiram dar ênfase!</p>
-
               <div class="comparison-block">
                 <div class="comp-box bad">
                   <span class="tag">Menos Natural</span>
@@ -628,20 +615,14 @@
               <h3>2. A Negação Simples (NON)</h3>
             </div>
             <div class="card-body">
-              <p class="explanation">Para negar uma frase em italiano, basta colocar a palavra <strong>NON</strong> imediatamente **antes do verbo principal**.</p>
-
               <div class="syntax-demo">
                 <div class="syntax-item">
                   <span class="part pos">Afirmativa:</span>
-                  <span>Parlo italiano. (Falo italiano)</span>
+                  <span>Parlo italiano.</span>
                 </div>
                 <div class="syntax-item">
                   <span class="part neg">Negativa:</span>
-                  <span><strong>Non</strong> parlo italiano. (Não falo italiano) <button class="btn-speak" data-text="Non parlo italiano"><i class="fa-solid fa-volume-high"></i></button></span>
-                </div>
-                <div class="syntax-item">
-                  <span class="part neg">Com Auxiliar:</span>
-                  <span><strong>Non ho</strong> capito. (Não entendi) <button class="btn-speak" data-text="Non ho capito"><i class="fa-solid fa-volume-high"></i></button></span>
+                  <span><strong>Non</strong> parlo italiano. <button class="btn-speak" data-text="Non parlo italiano"><i class="fa-solid fa-volume-high"></i></button></span>
                 </div>
               </div>
             </div>
@@ -669,7 +650,7 @@
               </div>
               <div class="flashcard-back">
                 <h3 id="fcBackText">Pronuncia-se [TCHÁO].</h3>
-                <p id="fcBackDesc">O 'C' seguido de 'I' forma o som de TCH. O 'I' funciona apenas como modificador de som quando há outra vogal a seguir.</p>
+                <p id="fcBackDesc">O 'C' seguido de 'I' forma o som de TCH.</p>
                 <button class="btn-speak mt-2" id="fcSpeakBtn" data-text="Ciao"><i class="fa-solid fa-volume-high"></i> Ouvir Exemplo</button>
               </div>
             </div>
@@ -692,12 +673,8 @@
 
           <div class="quiz-card" id="quizCard">
             <h3 id="quizQuestion">Qual é o artigo correto para a palavra masculina "STUDENTE"?</h3>
-            <div class="options-grid" id="quizOptions">
-              <!-- Options rendered dynamically -->
-            </div>
-            <div class="quiz-explanation hidden" id="quizExplanation">
-              <!-- Explanation rendered dynamically -->
-            </div>
+            <div class="options-grid" id="quizOptions"></div>
+            <div class="quiz-explanation hidden" id="quizExplanation"></div>
             <button id="btnNextQuestion" class="btn-pri hidden">Próxima Questão <i class="fa-solid fa-arrow-right"></i></button>
           </div>
         </div>
